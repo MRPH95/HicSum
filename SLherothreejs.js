@@ -98,52 +98,31 @@ function init() {
       // Add the model to the scene
       scene.add(model);
 
-      // Create the reflective floor
-      var floorGeometry = new THREE.PlaneGeometry(100, 100, 100, 100);
-      var floorMaterial = new THREE.MeshStandardMaterial({
-        color: 0x1F1D1D,
-        metalness: 5,
-        roughness: 1,
-      });
-      var floor = new THREE.Mesh(floorGeometry, floorMaterial);
-      floor.rotation.x = -Math.PI / 2; // Rotate the floor to be horizontal
-      floor.position.y = -2; // Adjust the position as needed
+      // Create particles
+      var particleCount = 500;
+      var particles = new THREE.Group();
+      var particleGeometry = new THREE.SphereBufferGeometry(0.0001, 6, 6);
+      var particleMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
 
-      // Add grid pattern to the floor
-      var gridTexture = new THREE.TextureLoader().load(
-        "https://threejs.org/examples/textures/grid.png"
-      );
-      gridTexture.wrapS = THREE.RepeatWrapping;
-      gridTexture.wrapT = THREE.RepeatWrapping;
-      gridTexture.repeat.set(100, 100);
-      floorMaterial.map = gridTexture;
-      floorMaterial.transparent = true;
-      floorMaterial.opacity = 0.3;
-
-      scene.add(floor);
-
-      // Function to handle scroll events
-      function handleScroll() {
-        scrollTarget = window.scrollY || window.pageYOffset;
+      for (var i = 0; i < particleCount; i++) {
+        var particle = new THREE.Mesh(particleGeometry, particleMaterial);
+        particle.position.set(
+          Math.random() * 2 - 1,
+          Math.random() * 2 - 1,
+          Math.random() * 2 - 1
+        );
+        particle.userData.velocity = new THREE.Vector3(
+          (Math.random() - 0.5) * 0.002, // Adjust the velocity range as needed
+          (Math.random() - 0.5) * 0.002,
+          (Math.random() - 0.5) * 0.002
+        );
+        particles.add(particle);
       }
 
-      // Variables to store the scroll position
-      var scrollPos = 0;
-      var scrollTarget = 0;
+      scene.add(particles);
 
-      // Function to handle scroll events
-      function handleScroll() {
-        scrollTarget = window.scrollY || window.pageYOffset;
-      }
-
-      // Animate the model
+      // Animate the model and particles
       function animate() {
-        // Update the scroll position
-        scrollPos += (scrollTarget - scrollPos) * 0.1; // Adjust the scroll factor for slower scrolling
-
-        // Update the camera's position based on the scroll position
-        camera.position.y = -scrollPos * 10; // Adjust the factor as needed
-
         // Rotate the model counterclockwise on the vertical axis
         model.rotation.y += 0.01; // Adjust the rotation speed as needed
 
@@ -155,8 +134,47 @@ function init() {
         requestAnimationFrame(animate);
       }
 
+      // Animate the particles
+      function animateParticles() {
+        particles.children.forEach(function (particle) {
+          particle.position.add(particle.userData.velocity);
+
+          // Reset particle position and velocity when it goes beyond a certain distance
+          if (particle.position.distanceTo(camera.position) > 2) {
+            particle.position.set(
+              Math.random() * 2 - 1,
+              Math.random() * 2 - 1,
+              Math.random() * 2 - 1
+            );
+            particle.userData.velocity.set(
+              (Math.random() - 0.5) * 0.002,
+              (Math.random() - 0.5) * 0.002,
+              (Math.random() - 0.5) * 0.002
+            );
+          }
+
+          // Calculate blur factor based on the depth from the camera
+          var depth = particle.position.distanceTo(camera.position);
+          var blurFactor = Math.max(0, 1 - depth * 0.5); // Adjust the blur intensity as needed
+
+          // Update particle material properties
+          particle.material.opacity = blurFactor;
+          particle.material.transparent = blurFactor < 1;
+        });
+
+        // Render the scene with the camera
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.render(scene, camera);
+
+        // Call animateParticles recursively
+        requestAnimationFrame(animateParticles);
+      }
+
       // Start the animation loop
       animate();
+
+      // Start the particle animation loop
+      animateParticles();
     },
     undefined,
     function (error) {
@@ -179,6 +197,3 @@ function init() {
 window.addEventListener("DOMContentLoaded", function () {
   init();
 });
-  </script>
-</body>
-</html>
