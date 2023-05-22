@@ -10,7 +10,7 @@ function init() {
     0.1,
     1000
   );
-  camera.position.set(0, .7, 1); // Adjust the camera position as needed
+  camera.position.set(0, .4, 1); // Adjust the camera position as needed
 
   // Create a WebGL renderer
   var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -106,7 +106,7 @@ function init() {
       scene.add(model);
 
       // Create particles
-      var particleCount = 50;
+      var particleCount = 10;
       var particles = new THREE.Group();
       var particleGeometry = new THREE.SphereBufferGeometry(0.001, 6, 6);
       var particleMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
@@ -154,7 +154,7 @@ function init() {
       
 // Constants
 var MOUSE_SENSITIVITY = 0.003; // Adjust the mouse sensitivity as needed
-var TARGET_OFFSET_Y = 0.1; // Offset in the y-axis
+var TARGET_OFFSET_Y = 0.05; // Offset in the y-axis
 var MAX_ROTATION_X = Math.PI / 12; // Maximum rotation in radians
 var SPIN_SENSITIVITY = 0.005; // Adjust the spin sensitivity as needed
 
