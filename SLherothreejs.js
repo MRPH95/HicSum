@@ -50,7 +50,7 @@ function init() {
 
       // Set the initial position, scale, and rotation of the model as desired
       model.position.set(0, 0, 0);
-      model.scale.set(0.5, 0.5, 0.5);
+      model.scale.set(0.45, 0.45, 0.45);
       model.rotation.set(0, 0, 0);
 
       // Traverse the model and apply the textures
