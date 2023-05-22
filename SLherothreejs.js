@@ -10,7 +10,7 @@ function init() {
     0.1,
     1000
   );
-  camera.position.set(0, 0, 1); // Adjust the camera position as needed
+  camera.position.set(0, .1, 1); // Adjust the camera position as needed
 
   // Create a WebGL renderer
   var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -154,7 +154,7 @@ function init() {
       
 // Constants
 var MOUSE_SENSITIVITY = 0.01; // Adjust the mouse sensitivity as needed
-var TARGET_OFFSET_Y = .5; // Offset in the y-axis
+var TARGET_OFFSET_Y = .1; // Offset in the y-axis
 
 // Variables
 var targetRotationY = 0;
