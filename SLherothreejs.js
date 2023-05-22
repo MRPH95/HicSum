@@ -58,7 +58,7 @@ function init() {
         if (child.isMesh) {
           // Apply the base color texture
           var baseColorTexture = new THREE.TextureLoader().load(
-            "https://raw.githubusercontent.com/MRPH95/HicSum/c8a3d8bceff9eb430fdbb5593c97daa73c5bcb36/FabricLeatherBuffaloRustic001_COL_VAR2_1K.jpg"
+            "https://raw.githubusercontent.com/MRPH95/HicSum/c8a3d8bceff9eb430fdbb5593c97daa73c5bcb36/FabricLeatherBuffaloRustic001_COL_VAR2_2K.jpg"
           );
           child.material.map = baseColorTexture;
           // Tint the base color of the model
@@ -71,25 +71,25 @@ function init() {
 
           // Apply the bump map
           var bumpMap = new THREE.TextureLoader().load(
-            "https://raw.githubusercontent.com/MRPH95/HicSum/c8a3d8bceff9eb430fdbb5593c97daa73c5bcb36/FabricLeatherBuffaloRustic001_BUMP_1K.jpg"
+            "https://raw.githubusercontent.com/MRPH95/HicSum/c8a3d8bceff9eb430fdbb5593c97daa73c5bcb36/FabricLeatherBuffaloRustic001_BUMP_2K.jpg"
           );
           child.material.bumpMap = bumpMap;
 
           // Apply the normal map
           var normalMap = new THREE.TextureLoader().load(
-            "https://raw.githubusercontent.com/MRPH95/HicSum/c8a3d8bceff9eb430fdbb5593c97daa73c5bcb36/FabricLeatherBuffaloRustic001_NRM_1K.jpg"
+            "https://raw.githubusercontent.com/MRPH95/HicSum/c8a3d8bceff9eb430fdbb5593c97daa73c5bcb36/FabricLeatherBuffaloRustic001_NRM_2K.jpg"
           );
           child.material.normalMap = normalMap;
 
           // Apply the roughness map
           var roughnessMap = new THREE.TextureLoader().load(
-            "https://raw.githubusercontent.com/MRPH95/HicSum/c8a3d8bceff9eb430fdbb5593c97daa73c5bcb36/FabricLeatherBuffaloRustic001_GLOSS_1K.jpg"
+            "https://raw.githubusercontent.com/MRPH95/HicSum/c8a3d8bceff9eb430fdbb5593c97daa73c5bcb36/FabricLeatherBuffaloRustic001_GLOSS_2K.jpg"
           );
           child.material.roughnessMap = roughnessMap;
 
           // Apply the reflection map
           var reflectionMap = new THREE.TextureLoader().load(
-            "https://raw.githubusercontent.com/MRPH95/HicSum/c8a3d8bceff9eb430fdbb5593c97daa73c5bcb36/FabricLeatherBuffaloRustic001_REFL_1K.jpg"
+            "https://raw.githubusercontent.com/MRPH95/HicSum/c8a3d8bceff9eb430fdbb5593c97daa73c5bcb36/FabricLeatherBuffaloRustic001_REFL_2K.jpg"
           );
           child.material.envMap = reflectionMap;
         }
