@@ -162,8 +162,8 @@ var targetRotationY = 0;
 var targetCameraY = 0;
 
 // Event listeners
-document.addEventListener('mousemove', onDocumentMouseMove, false);
-document.addEventListener('wheel', onDocumentMouseWheel, false);
+document.addEventListener("mousemove", onDocumentMouseMove, false);
+document.addEventListener("wheel", onDocumentMouseWheel, false);
 
 // Mouse move event handler
 function onDocumentMouseMove(event) {
@@ -191,6 +191,7 @@ function animate() {
   cameraY = Math.max(cameraY, CAMERA_CEILING);
   camera.position.setY(cameraY);
   camera.lookAt(model.position);
+
 
   // Update particle positions
   particles.children.forEach(function (particle) {
