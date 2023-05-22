@@ -99,10 +99,10 @@ function init() {
       scene.add(model);
 
       // Create particles
-      var particleCount = 1000;
+      var particleCount = 500;
       var particles = new THREE.Group();
-      var particleGeometry = new THREE.SphereBufferGeometry(0.001, 50, 50);
-      var particleMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+      var particleGeometry = new THREE.SphereBufferGeometry(0.001, 6, 6);
+      var particleMaterial = new THREE.MeshBasicMaterial({ color: 0xd8bfc3 });
 
       for (var i = 0; i < particleCount; i++) {
         var particle = new THREE.Mesh(particleGeometry, particleMaterial);
@@ -112,9 +112,9 @@ function init() {
           Math.random() * 2 - 1
         );
         particle.userData.velocity = new THREE.Vector3(
-          (Math.random() - 0.5) * 0.002, // Adjust the velocity range as needed
-          (Math.random() - 0.5) * 0.002,
-          (Math.random() - 0.5) * 0.002
+          (Math.random() - 0.5) * 0.01, // Adjust the velocity range as needed
+          (Math.random() - 0.5) * 0.01,
+          (Math.random() - 0.5) * 0.01
         );
         particles.add(particle);
       }
