@@ -121,18 +121,34 @@ function init() {
 
       scene.add(particles);
 
-      // Animate the model and particles
-      function animate() {
-        // Rotate the model counterclockwise on the vertical axis
-        model.rotation.y += 0.01; // Adjust the rotation speed as needed
+      // Create a composer for post-processing
+      var composer = new THREE.EffectComposer(renderer);
+        composer.setSize(window.innerWidth, window.innerHeight);
 
-        // Render the scene with the camera
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.render(scene, camera);
+      // Create a render pass
+      var renderPass = new THREE.RenderPass(scene, camera);
+        composer.addPass(renderPass);
 
-        // Call animate recursively
-        requestAnimationFrame(animate);
-      }
+      // Create a bokeh pass
+      var bokehPass = new THREE.BokehPass(scene, camera, {
+        focus: 1.0,
+        aperture: 0.025,
+        maxblur: 0.01,
+     });
+     bokehPass.renderToScreen = true;
+      composer.addPass(bokehPass);
+
+// Animate the model and particles
+function animate() {
+  // Rotate the model counterclockwise on the vertical axis
+  model.rotation.y += 0.01; // Adjust the rotation speed as needed
+
+  // Render the scene with the composer
+  composer.render();
+
+  // Call animate recursively
+  requestAnimationFrame(animate);
+}
 
       // Animate the particles
       function animateParticles() {
