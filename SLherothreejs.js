@@ -154,7 +154,8 @@ function init() {
       
 // Constants
 var MOUSE_SENSITIVITY = 0.01; // Adjust the mouse sensitivity as needed
-var TARGET_OFFSET_Y = .1; // Offset in the y-axis
+var TARGET_OFFSET_Y = 1; // Offset in the y-axis
+var MAX_ROTATION_X = Math.PI / 4; // Maximum rotation in radians
 
 // Variables
 var targetRotationY = 0;
@@ -168,7 +169,7 @@ function onDocumentMouseMove(event) {
   var mouseX = (event.clientX - window.innerWidth / 2) * MOUSE_SENSITIVITY;
   var mouseY = (event.clientY - window.innerHeight / 2) * MOUSE_SENSITIVITY;
   targetRotationY = mouseX;
-  targetRotationX = mouseY;
+  targetRotationX = Math.max(-MAX_ROTATION_X, Math.min(MAX_ROTATION_X, mouseY));
 }
 
 // Animation loop
