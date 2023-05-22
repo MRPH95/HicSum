@@ -35,7 +35,7 @@ function init() {
   scene.add(light2);
 
   var light3 = new THREE.DirectionalLight(0xffffff, 5);
-  light3.position.set(0, -.1, 1); // Adjust the position as needed
+  light3.position.set(0, -0.1, 1); // Adjust the position as needed
   scene.add(light3);
 
   var light4 = new THREE.DirectionalLight(0xffffff, 3);
@@ -51,7 +51,7 @@ function init() {
 
       // Set the initial position, scale, and rotation of the model as desired
       model.position.set(0, 0, 0);
-      model.scale.set(.5, .5, .5);
+      model.scale.set(0.5, 0.5, 0.5);
       model.rotation.set(0, 0, 0);
 
       // Traverse the model and apply the textures
@@ -68,7 +68,7 @@ function init() {
           // Set the emissive color of the model
           var emissiveColor = new THREE.Color("#D6D4D3");
           child.material.emissive = emissiveColor;
-          child.material.emissiveIntensity = .01; // Adjust the intensity as needed
+          child.material.emissiveIntensity = 0.01; // Adjust the intensity as needed
 
           // Apply the bump map
           var bumpMap = new THREE.TextureLoader().load(
@@ -130,16 +130,13 @@ function init() {
       var renderPass = new THREE.RenderPass(scene, camera);
       composer.addPass(renderPass);
 
-// Create a bokeh pass
-var bokehPass = new THREE.BokehPass(scene, camera, {
-  focus: 20,
-  aperture: 0.000001,
-  maxblur: 5
-});
-
-composer.addPass(bokehPass.renderPass);
-
-
+      // Create a bokeh pass
+      var bokehPass = new THREE.BokehPass(scene, camera, {
+        focus: 20,
+        aperture: 0.000001,
+        maxblur: 5,
+      });
+      composer.addPass(bokehPass);
 
       // Track mouse position
       var mouse = new THREE.Vector2();
@@ -151,51 +148,50 @@ composer.addPass(bokehPass.renderPass);
         mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
       });
 
-// Animation loop
-function animate() {
-  requestAnimationFrame(animate);
+      // Animation loop
+      function animate() {
+        requestAnimationFrame(animate);
 
-  // Orbit the camera around the model based on the mouse position
-  var modelRotationX = -mouse.y * 0.4; // Adjust the rotation speed as needed
-  var modelRotationY = mouse.x * 0.4; // Adjust the rotation speed as needed
+        // Orbit the camera around the model based on the mouse position
+        var modelRotationX = -mouse.y * 0.4; // Adjust the rotation speed as needed
+        var modelRotationY = mouse.x * 0.4; // Adjust the rotation speed as needed
 
-  var cameraDistance = 1; // Adjust the distance from the model as needed
-  var cameraX = Math.sin(modelRotationY) * cameraDistance;
-  var cameraY = Math.sin(modelRotationX) * cameraDistance;
-  var cameraZ = Math.cos(modelRotationY) * cameraDistance;
+        var cameraDistance = 1; // Adjust the distance from the model as needed
+        var cameraX = Math.sin(modelRotationY) * cameraDistance;
+        var cameraY = Math.sin(modelRotationX) * cameraDistance;
+        var cameraZ = Math.cos(modelRotationY) * cameraDistance;
 
-  camera.position.set(cameraX, cameraY, cameraZ);
-  camera.lookAt(model.position);
+        camera.position.set(cameraX, cameraY, cameraZ);
+        camera.lookAt(model.position);
 
-  // Update particle positions
-  particles.children.forEach(function (particle) {
-    particle.position.add(particle.userData.velocity);
+        // Update particle positions
+        particles.children.forEach(function (particle) {
+          particle.position.add(particle.userData.velocity);
 
-    if (
-      particle.position.x < -1 ||
-      particle.position.x > 1 ||
-      particle.position.y < -1 ||
-      particle.position.y > 1 ||
-      particle.position.z < -1 ||
-      particle.position.z > 1
-    ) {
-      particle.position.set(
-        Math.random() * 2 - 1,
-        Math.random() * 2 - 1,
-        Math.random() * 2 - 1
-      );
-      particle.userData.velocity = new THREE.Vector3(
-        (Math.random() - 0.5) * 0.005,
-        (Math.random() - 0.5) * 0.005,
-        (Math.random() - 0.5) * 0.005
-      );
-    }
-  });
+          if (
+            particle.position.x < -1 ||
+            particle.position.x > 1 ||
+            particle.position.y < -1 ||
+            particle.position.y > 1 ||
+            particle.position.z < -1 ||
+            particle.position.z > 1
+          ) {
+            particle.position.set(
+              Math.random() * 2 - 1,
+              Math.random() * 2 - 1,
+              Math.random() * 2 - 1
+            );
+            particle.userData.velocity = new THREE.Vector3(
+              (Math.random() - 0.5) * 0.005,
+              (Math.random() - 0.5) * 0.005,
+              (Math.random() - 0.5) * 0.005
+            );
+          }
+        });
 
-  // Render the scene
-  composer.render();
-}
-
+        // Render the scene
+        composer.render();
+      }
 
       // Start the animation loop
       animate();
