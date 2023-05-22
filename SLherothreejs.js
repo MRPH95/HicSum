@@ -121,41 +121,6 @@ function init() {
 
       scene.add(particles);
 
-      // Create a point light for particle illumination
-      var particleLight = new THREE.PointLight(0xffffff, 1, 2); // Adjust the color and intensity as needed
-      scene.add(particleLight);
-
-      // Animate the model and particles
-      function animate() {
-        // Rotate the model counterclockwise on the vertical axis
-        model.rotation.y += 0.01; // Adjust the rotation speed as needed
-
-        // Render the scene with the camera
-        renderer.render(scene, camera);
-
-        // Update the particle positions and illuminate them
-        particles.children.forEach(function (particle) {
-          particle.position.add(particle.userData.velocity);
-
-          if (
-            particle.position.x < -1 ||
-            particle.position.x > 1 ||
-            particle.position.y < -1 ||
-            particle.position.y > 1 ||
-            particle.position.z < -1 ||
-            particle.position.z > 1
-          ) {
-            particle.position.set(
-              Math.random() * 2 - 1,
-              Math.random() * 2 - 1,
-              Math.random() * 2 - 1
-            );
-          }
-        });
-
-        // Update the particle light position
-        particleLight.position.copy(camera.position);
-
         // Request the next frame
         requestAnimationFrame(animate);
       }
