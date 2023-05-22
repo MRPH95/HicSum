@@ -14,8 +14,7 @@ function init() {
 
 // Create a WebGL renderer
 var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-renderer.setClearColor(0xffffff, 0); // Set the clear color to white and alpha to 0 (transparent)
-renderer.setClearAlpha(0); // Set the clear alpha value to 0
+renderer.setClearColor(0xeeeeee); // Set the clear color to white and alpha to 0 (transparent)
 renderer.setSize(window.innerWidth, window.innerHeight);
 
   // Append the renderer to the container element
