@@ -146,6 +146,13 @@ function init() {
         // Call animate recursively
         requestAnimationFrame(animate);
       }
+      
+        // Create a point light for particle illumination
+  var particleLight = new THREE.PointLight(0xffffff, 1, 2); // Adjust the color and intensity as needed
+  scene.add(particleLight);
+      
+            // Update the position of the particle light
+      particleLight.position.copy(particle.position);
 
       // Animate the particles
       function animateParticles() {
