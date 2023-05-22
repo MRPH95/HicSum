@@ -150,6 +150,9 @@ renderer.setSize(window.innerWidth, window.innerHeight);
       // Animation loop
       function animate() {
         requestAnimationFrame(animate);
+        
+         // Rotate the model on the y-axis
+  model.rotation.y += 0.01; // Adjust the rotation speed as needed
 
         // Orbit the camera around the model based on the mouse position
         var modelRotationX = -mouse.y * 0.4; // Adjust the rotation speed as needed
