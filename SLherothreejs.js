@@ -178,6 +178,9 @@ function animate() {
   model.rotation.y += (targetRotationY - model.rotation.y) * 0.05;
   model.rotation.x += (targetRotationX - model.rotation.x) * 0.05;
 
+  // Update camera's lookAt
+  camera.lookAt(model.position);
+
   // Update particle positions
   particles.children.forEach(function (particle) {
     particle.position.add(particle.userData.velocity);
