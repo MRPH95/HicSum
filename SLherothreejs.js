@@ -42,11 +42,11 @@ function init() {
   scene.add(light4);
 
   // Load the post-processing library
-  var composer = new EffectComposer(renderer);
-  composer.addPass(new RenderPass(scene, camera));
+  var composer = new POSTPROCESSING.EffectComposer(renderer);
+  composer.addPass(new POSTPROCESSING.RenderPass(scene, camera));
 
   // Create a depth of field effect
-  var bokehPass = new BokehPass(scene, camera, {
+  var bokehPass = new POSTPROCESSING.BokehPass(scene, camera, {
     focus: 1, // Adjust the focus distance
     aperture: 0.025, // Adjust the aperture size
     maxblur: 0.01, // Adjust the maximum blur strength
