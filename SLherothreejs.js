@@ -251,7 +251,7 @@ animate();
 
 
 
-    },
+    }
     undefined,
     function (error) {
       console.error(error);
