@@ -149,19 +149,10 @@ function init() {
 function animate() {
   requestAnimationFrame(animate);
 
-  // Rotate the model on the y-axis
-  model.rotation.y += 0.01; // Adjust the rotation speed as needed
+  // Move the camera in the y-direction based on scroll position
+  var cameraY = -scrollY * 0.01; // Adjust the movement speed as needed
 
-  // Orbit the camera vertically based on the scroll position
-  var modelRotationX = -scrollY * 0.01; // Adjust the rotation speed as needed
-  var modelRotationY = 0.01; // Initial value for model rotation
-
-  var cameraDistance = 1.5; // Adjust the distance from the model as needed
-  var cameraX = Math.sin(modelRotationY) * cameraDistance;
-  var cameraY = Math.sin(modelRotationX) * cameraDistance;
-  var cameraZ = Math.cos(modelRotationY) * cameraDistance;
-
-  camera.position.set(cameraX, cameraY, cameraZ);
+  camera.position.setY(cameraY);
   camera.lookAt(model.position);
 
   // Update particle positions
@@ -195,6 +186,7 @@ function animate() {
 
 // Start the animation loop
 animate();
+
 
     },
     undefined,
