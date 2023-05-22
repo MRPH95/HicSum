@@ -153,16 +153,21 @@ function init() {
       });
       
 // Constants
-var MOUSE_SENSITIVITY = 0.001; // Adjust the mouse sensitivity as needed
+var MOUSE_SENSITIVITY = 0.01; // Adjust the mouse sensitivity as needed
 var TARGET_OFFSET_Y = 0.1; // Offset in the y-axis
 var MAX_ROTATION_X = Math.PI / 4; // Maximum rotation in radians
+var SPIN_SENSITIVITY = 0.01; // Adjust the spin sensitivity as needed
 
 // Variables
 var targetRotationY = 0;
 var targetRotationX = 0;
+var spinEnabled = false;
+var spinSpeed = 0;
 
 // Event listeners
 document.addEventListener('mousemove', onDocumentMouseMove, false);
+document.addEventListener('mousedown', onDocumentMouseDown, false);
+document.addEventListener('mouseup', onDocumentMouseUp, false);
 
 // Mouse move event handler
 function onDocumentMouseMove(event) {
@@ -172,6 +177,16 @@ function onDocumentMouseMove(event) {
   targetRotationX = Math.max(-MAX_ROTATION_X, Math.min(MAX_ROTATION_X, mouseY));
 }
 
+// Mouse down event handler
+function onDocumentMouseDown(event) {
+  spinEnabled = true;
+}
+
+// Mouse up event handler
+function onDocumentMouseUp(event) {
+  spinEnabled = false;
+}
+
 // Animation loop
 function animate() {
   requestAnimationFrame(animate);
@@ -179,6 +194,11 @@ function animate() {
   // Update model rotation based on mouse movement
   model.rotation.y += (targetRotationY - model.rotation.y) * 0.05;
   model.rotation.x += (targetRotationX - model.rotation.x) * 0.05;
+
+  // Spin the model if enabled
+  if (spinEnabled) {
+    model.rotation.y += spinSpeed;
+  }
 
   // Update camera's lookAt with offset
   var targetPosition = model.position.clone();
@@ -211,7 +231,7 @@ function animate() {
   });
 
   // Render the scene
-  composer.render();
+  renderer.render(scene, camera);
 }
 
 // Start the animation loop
