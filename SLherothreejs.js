@@ -99,9 +99,9 @@ function init() {
       scene.add(model);
 
       // Create particles
-      var particleCount = 500;
+      var particleCount = 1000;
       var particles = new THREE.Group();
-      var particleGeometry = new THREE.SphereBufferGeometry(0.001, 6, 6);
+      var particleGeometry = new THREE.SphereBufferGeometry(0.001, 50, 50);
       var particleMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
 
       for (var i = 0; i < particleCount; i++) {
