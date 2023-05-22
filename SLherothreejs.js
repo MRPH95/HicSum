@@ -49,7 +49,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
       var model = gltf.scene;
 
       // Set the initial position, scale, and rotation of the model as desired
-      model.position.set(-1, -.5, 0);
+      model.position.set(0, -.5, 0);
       model.scale.set(0.5, 0.5, 0.5);
       model.rotation.set(0, 0, 0);
 
