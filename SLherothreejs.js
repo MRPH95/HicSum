@@ -109,7 +109,7 @@ function init() {
       var particleCount = 50;
       var particles = new THREE.Group();
       var particleGeometry = new THREE.SphereBufferGeometry(0.001, 6, 6);
-      var particleMaterial = new THREE.MeshBasicMaterial({ color: 0xd8bfc3 });
+      var particleMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
 
       for (var i = 0; i < particleCount; i++) {
         var particle = new THREE.Mesh(particleGeometry, particleMaterial);
