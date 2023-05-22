@@ -231,6 +231,16 @@ function animate() {
     }
   });
 
+      // Function to handle window resize events
+      function onWindowResize() {
+        // Update camera aspect ratio
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+
+        // Update renderer size
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+   
   // Render the scene
   renderer.render(scene, camera);
 }
