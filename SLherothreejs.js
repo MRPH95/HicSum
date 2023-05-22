@@ -44,7 +44,7 @@ function init() {
   // Load the GLTF model
   var loader = new THREE.GLTFLoader();
   loader.load(
-    "https://raw.githubusercontent.com/MRPH95/HicSum/main/SL%20Logo%20beveled.gltf",
+    "https://raw.githubusercontent.com/MRPH95/HicSum/main/SL%20Logo%20curves.gltf",
     function (gltf) {
       var model = gltf.scene;
 
