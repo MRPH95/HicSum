@@ -154,7 +154,7 @@ function init() {
       
 // Constants
 var MOUSE_SENSITIVITY = 0.01; // Adjust the mouse sensitivity as needed
-var TARGET_OFFSET_Y = 1; // Offset in the y-axis
+var TARGET_OFFSET_Y = .5; // Offset in the y-axis
 
 // Variables
 var targetRotationY = 0;
