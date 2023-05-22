@@ -232,12 +232,22 @@ function animate() {
     }
   });
 
-    // Update renderer size on window resize
-  function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+// Update renderer size on window resize
+function onWindowResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  // Adjust model scale based on window width
+  var modelScale = 0.45; // Initial model scale
+  if (window.innerWidth < 600) {
+    var scaleFactor = window.innerWidth / 600; // Calculate scale factor
+    modelScale = 0.45 * scaleFactor; // Apply scale factor to initial scale
   }
+
+  // Set the model scale
+  model.scale.set(modelScale, modelScale, modelScale);
+}
 
   // Event listener for window resize
   window.addEventListener("resize", onWindowResize, false);
