@@ -154,25 +154,20 @@ function init() {
       
 // Constants
 var MOUSE_SENSITIVITY = 0.01; // Adjust the mouse sensitivity as needed
-var SCROLL_SENSITIVITY = 0.01; // Adjust the scroll sensitivity as needed
 
 // Variables
 var targetRotationY = 0;
-var targetCameraY = 0;
+var targetRotationX = 0;
 
 // Event listeners
 document.addEventListener('mousemove', onDocumentMouseMove, false);
-document.addEventListener('wheel', onDocumentMouseWheel, false);
 
 // Mouse move event handler
 function onDocumentMouseMove(event) {
   var mouseX = (event.clientX - window.innerWidth / 2) * MOUSE_SENSITIVITY;
+  var mouseY = (event.clientY - window.innerHeight / 2) * MOUSE_SENSITIVITY;
   targetRotationY = mouseX;
-}
-
-// Mouse wheel event handler
-function onDocumentMouseWheel(event) {
-  targetCameraY += event.deltaY * SCROLL_SENSITIVITY;
+  targetRotationX = mouseY;
 }
 
 // Animation loop
@@ -181,11 +176,7 @@ function animate() {
 
   // Update model rotation based on mouse movement
   model.rotation.y += (targetRotationY - model.rotation.y) * 0.05;
-
-  // Update camera position based on scroll
-  var cameraY = -targetCameraY;
-  camera.position.setY(cameraY);
-  camera.lookAt(0, 0, 0); // Set the orbit point to (0, 0, 0)
+  model.rotation.x += (targetRotationX - model.rotation.x) * 0.05;
 
   // Update particle positions
   particles.children.forEach(function (particle) {
@@ -218,7 +209,6 @@ function animate() {
 
 // Start the animation loop
 animate();
-
 
 
 
