@@ -65,7 +65,7 @@ function init() {
 
           // Apply the bump map
           var bumpMap = new THREE.TextureLoader().load(
-            "https://raw.githubusercontent.com/MRPH95/HicSum/main/TerrazzoSlab003_BUMP_2K_METALNESS.png"
+            "https://raw.githubusercontent.com/MRPH95/HicSum/main/TerrazzoSlab003_IDMAP_2K_METALNESS.png"
           );
           child.material.bumpMap = bumpMap;
 
@@ -81,12 +81,6 @@ function init() {
           );
           child.material.roughnessMap = roughnessMap;
 
-          // Apply the reflection map
-          var reflectionMap = new THREE.TextureLoader().load(
-            "https://raw.githubusercontent.com/MRPH95/HicSum/main/TerrazzoSlab003_IDMAP_2K_METALNESS.png"
-          );
-          child.material.envMap = reflectionMap;
-          
               // Apply the ambient occlusion (AO) map
     var aoMap = new THREE.TextureLoader().load(
       "https://raw.githubusercontent.com/MRPH95/HicSum/main/TerrazzoSlab003_AO_2K_METALNESS.png"
