@@ -10,7 +10,7 @@ function init() {
     0.1,
     1000
   );
-  camera.position.set(0, 1.5, 1); // Adjust the camera position as needed
+  camera.position.set(0, 0, 1); // Adjust the camera position as needed
 
 // Create a WebGL renderer
 var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -49,7 +49,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
       var model = gltf.scene;
 
       // Set the initial position, scale, and rotation of the model as desired
-      model.position.set(0, .5, 0);
+      model.position.set(0, 0, 0);
       model.scale.set(0.5, 0.5, 0.5);
       model.rotation.set(0, 0, 0);
 
@@ -155,8 +155,8 @@ renderer.setSize(window.innerWidth, window.innerHeight);
   model.rotation.y += 0.01; // Adjust the rotation speed as needed
 
         // Orbit the camera around the model based on the mouse position
-        var modelRotationX = mouse.y * 0.4; // Adjust the rotation speed as needed
-        var modelRotationY = -mouse.x * 0.4; // Adjust the rotation speed as needed
+        var modelRotationX = mouse.y * 0.2; // Adjust the rotation speed as needed
+        var modelRotationY = -mouse.x * 0.2; // Adjust the rotation speed as needed
 
         var cameraDistance = 1.5; // Adjust the distance from the model as needed
         var cameraX = Math.sin(modelRotationY) * cameraDistance;
