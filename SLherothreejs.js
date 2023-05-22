@@ -159,11 +159,24 @@ var CAMERA_CEILING = 5; // Height of the camera ceiling/starting point
 
 // Variables
 var targetRotationY = 0;
-var targetCameraY = 0;
+var targetCameraY = CAMERA_CEILING; // Initialize camera position at the ceiling
+
+// Event listeners
+document.addEventListener('mousemove', onDocumentMouseMove, false);
+document.addEventListener('wheel', onDocumentMouseWheel, false);
+
+// Mouse move event handler
+function onDocumentMouseMove(event) {
+  var mouseX = (event.clientX - window.innerWidth / 2) * MOUSE_SENSITIVITY;
+  targetRotationY = mouseX;
+}
 
 // Mouse wheel event handler
 function onDocumentMouseWheel(event) {
   targetCameraY += event.deltaY * SCROLL_SENSITIVITY;
+
+  // Limit camera position to the ceiling/starting point
+  targetCameraY = Math.max(targetCameraY, CAMERA_CEILING);
 }
 
 // Animation loop
@@ -203,37 +216,13 @@ function animate() {
     }
   });
 
-  // Update particle positions
-  particles.children.forEach(function (particle) {
-    particle.position.add(particle.userData.velocity);
-
-    if (
-      particle.position.x < -1 ||
-      particle.position.x > 1 ||
-      particle.position.y < -1 ||
-      particle.position.y > 1 ||
-      particle.position.z < -1 ||
-      particle.position.z > 1
-    ) {
-      particle.position.set(
-        Math.random() * 2 - 1,
-        Math.random() * 2 - 1,
-        Math.random() * 2 - 1
-      );
-      particle.userData.velocity = new THREE.Vector3(
-        (Math.random() - 0.5) * 0.005,
-        (Math.random() - 0.5) * 0.005,
-        (Math.random() - 0.5) * 0.005
-      );
-    }
-  });
-
   // Render the scene
   composer.render();
 }
 
 // Start the animation loop
 animate();
+
 
 
 
