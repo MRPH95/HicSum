@@ -58,7 +58,7 @@ function init() {
         if (child.isMesh) {
           // Apply the base color texture
           var baseColorTexture = new THREE.TextureLoader().load(
-            "https://github.com/MRPH95/HicSum/blob/48b6d927606a9758993929a182db0155fd776c41/FabricLeatherBuffaloRustic001_COL_VAR2_1K.jpg"
+            "https://raw.githubusercontent.com/MRPH95/HicSum/main/FabricLeatherBuffaloRustic001_COL_VAR2_1K.jpg"
           );
           child.material.map = baseColorTexture;
           // Tint the base color of the model
@@ -71,31 +71,31 @@ function init() {
 
           // Apply the bump map
           var bumpMap = new THREE.TextureLoader().load(
-            "https://github.com/MRPH95/HicSum/blob/48b6d927606a9758993929a182db0155fd776c41/FabricLeatherBuffaloRustic001_BUMP_1K.jpg"
+            "https://raw.githubusercontent.com/MRPH95/HicSum/main/FabricLeatherBuffaloRustic001_BUMP_1K.jpg"
           );
           child.material.bumpMap = bumpMap;
 
           // Apply the normal map
           var normalMap = new THREE.TextureLoader().load(
-            "https://github.com/MRPH95/HicSum/blob/48b6d927606a9758993929a182db0155fd776c41/FabricLeatherBuffaloRustic001_NRM_1K.jpg"
+            "https://raw.githubusercontent.com/MRPH95/HicSum/main/FabricLeatherBuffaloRustic001_NRM_1K.jpg"
           );
           child.material.normalMap = normalMap;
 
           // Apply the roughness map
           var roughnessMap = new THREE.TextureLoader().load(
-            "https://github.com/MRPH95/HicSum/blob/48b6d927606a9758993929a182db0155fd776c41/FabricLeatherBuffaloRustic001_GLOSS_1K.jpg"
+            "https://raw.githubusercontent.com/MRPH95/HicSum/main/FabricLeatherBuffaloRustic001_GLOSS_1K.jpg"
           );
           child.material.roughnessMap = roughnessMap;
 
           // Apply the reflection map
           var reflectionMap = new THREE.TextureLoader().load(
-            "https://github.com/MRPH95/HicSum/blob/48b6d927606a9758993929a182db0155fd776c41/FabricLeatherBuffaloRustic001_REFL_1K.jpg"
+            "https://raw.githubusercontent.com/MRPH95/HicSum/main/FabricLeatherBuffaloRustic001_REFL_1K.jpg"
           );
           child.material.envMap = reflectionMap;
           
               // Apply the ambient occlusion (AO) map
     var aoMap = new THREE.TextureLoader().load(
-      "https://github.com/MRPH95/HicSum/blob/48b6d927606a9758993929a182db0155fd776c41/FabricLeatherBuffaloRustic001_AO_1K.jpg"
+      "https://raw.githubusercontent.com/MRPH95/HicSum/main/FabricLeatherBuffaloRustic001_AO_1K.jpg"
     );
     child.material.aoMap = aoMap;
     child.material.aoMapIntensity = 1; // Adjust the intensity as needed
