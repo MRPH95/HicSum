@@ -10,7 +10,7 @@ function init() {
     0.1,
     1000
   );
-  camera.position.set(0, 0, 12); // Adjust the camera position as needed
+  camera.position.set(0, 0, 20); // Adjust the camera position as needed
 
   // Create a WebGL renderer
   var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -131,7 +131,7 @@ composer.addPass(renderPass);
 
 // Create a bokeh pass
 var bokehPass = new THREE.BokehPass(scene, camera, {
-  focus: 1.0,
+  focus: 20,
   aperture: 0.000001,
   maxblur: 5,
 });
