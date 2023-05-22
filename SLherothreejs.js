@@ -240,8 +240,8 @@ function onWindowResize() {
 
   // Adjust model scale based on window width
   var modelScale = 0.45; // Initial model scale
-  if (window.innerWidth < 600) {
-    var scaleFactor = window.innerWidth / 600; // Calculate scale factor
+  if (window.innerWidth < 840) {
+    var scaleFactor = window.innerWidth / 840; // Calculate scale factor
     modelScale = 0.45 * scaleFactor; // Apply scale factor to initial scale
   }
 
