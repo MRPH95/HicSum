@@ -185,7 +185,7 @@ function animate() {
   // Update camera position based on scroll
   var cameraY = -targetCameraY;
   camera.position.setY(cameraY);
-  camera.lookAt(model.position);
+  camera.lookAt(0, 0, 0); // Set the orbit point to (0, 0, 0)
 
   // Update particle positions
   particles.children.forEach(function (particle) {
@@ -216,8 +216,12 @@ function animate() {
   composer.render();
 }
 
+// Move the 3D model down by 1 unit in the y-axis
+model.position.setY(-1);
+
 // Start the animation loop
 animate();
+
 
 
 
