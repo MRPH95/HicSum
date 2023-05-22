@@ -29,7 +29,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
   light1.position.set(-2, 1, 2); // Adjust the position as needed
   scene.add(light1);
 
-  var light2 = new THREE.DirectionalLight(0xd8bfc3, 5);
+  var light2 = new THREE.DirectionalLight(0xffffff, 5);
   light2.position.set(2, 0, 2); // Adjust the position as needed
   scene.add(light2);
 
