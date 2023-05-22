@@ -25,19 +25,19 @@ function init() {
   scene.add(light);
 
   // Create directional lights
-  var light1 = new THREE.DirectionalLight(0xffffff, 7);
+  var light1 = new THREE.DirectionalLight(0xffffff, 3);
   light1.position.set(-2, 1, 2); // Adjust the position as needed
   scene.add(light1);
 
-  var light2 = new THREE.DirectionalLight(0xffffff, 5);
+  var light2 = new THREE.DirectionalLight(0xffffff, 3);
   light2.position.set(2, 0, 2); // Adjust the position as needed
   scene.add(light2);
 
-  var light3 = new THREE.DirectionalLight(0xffffff, 5);
+  var light3 = new THREE.DirectionalLight(0xffffff, 2);
   light3.position.set(-1, -0.1, 1); // Adjust the position as needed
   scene.add(light3);
 
-  var light4 = new THREE.DirectionalLight(0xffffff, 3);
+  var light4 = new THREE.DirectionalLight(0xffffff, 2);
   light4.position.set(0, 0, -2); // Adjust the position as needed
   scene.add(light4);
 
