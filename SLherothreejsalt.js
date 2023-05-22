@@ -61,13 +61,7 @@ function init() {
             "https://raw.githubusercontent.com/MRPH95/HicSum/main/TerrazzoSlab003_COL_2K_METALNESS.png"
           );
           child.material.map = baseColorTexture;
-          // Tint the base color of the model
-          var baseColor = new THREE.Color("#201c1e");
-          child.material.color = baseColor;
-          // Set the emissive color of the model
-          var emissiveColor = new THREE.Color("#d6d4d3");
-          child.material.emissive = emissiveColor;
-          child.material.emissiveIntensity = 0.02; // Adjust the intensity as needed
+         
 
           // Apply the bump map
           var bumpMap = new THREE.TextureLoader().load(
