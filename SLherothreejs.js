@@ -134,12 +134,11 @@ function init() {
 var bokehPass = new THREE.BokehPass(scene, camera, {
   focus: 20,
   aperture: 0.000001,
-  maxblur: 5,
-  width: window.innerWidth,
-  height: window.innerHeight,
+  maxblur: 5
 });
-bokehPass.renderToScreen = true;
-composer.addPass(bokehPass);
+
+composer.addPass(bokehPass.renderPass);
+
 
 
       // Track mouse position
