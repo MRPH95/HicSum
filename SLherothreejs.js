@@ -14,7 +14,7 @@ function init() {
 
   // Create a WebGL renderer
   var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-  renderer.setClearColor(0x000000, 0); // Set the clear color to black and alpha to 0 (transparent)
+  renderer.setClearColor(0xd8bfc3, 1); // Set the clear color to black and alpha to 0 (transparent)
   renderer.setClearAlpha(0); // Set the clear alpha value to 0
   renderer.setSize(window.innerWidth, window.innerHeight);
 
