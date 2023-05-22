@@ -10,7 +10,7 @@ function init() {
     0.1,
     1000
   );
-  camera.position.set(0, 2, 1); // Adjust the camera position as needed
+  camera.position.set(0, 8, 1); // Adjust the camera position as needed
 
   // Create a WebGL renderer
   var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -150,7 +150,7 @@ function animate() {
   requestAnimationFrame(animate);
 
   // Move the camera in the y-direction based on scroll position
-  var cameraY = -scrollY * 0.01; // Adjust the movement speed as needed
+  var cameraY = -scrollY * 0.005; // Adjust the movement speed as needed
 
   camera.position.setY(cameraY);
   camera.lookAt(model.position);
