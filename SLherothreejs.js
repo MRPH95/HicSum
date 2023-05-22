@@ -49,7 +49,7 @@ function init() {
       var model = gltf.scene;
 
       // Set the initial position, scale, and rotation of the model as desired
-      model.position.set(0, 0, 0);
+      model.position.set(0, -1, 0);
       model.scale.set(0.5, 0.5, 0.5);
       model.rotation.set(0, 0, 0);
 
@@ -215,9 +215,6 @@ function animate() {
   // Render the scene
   composer.render();
 }
-
-// Move the 3D model down by 1 unit in the y-axis
-model.position.setY(-1);
 
 // Start the animation loop
 animate();
