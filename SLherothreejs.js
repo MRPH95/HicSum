@@ -154,8 +154,8 @@ function init() {
         requestAnimationFrame(animate);
 
         // Rotate the model towards the mouse position
-        var modelRotationX = -mouse.y * 0.01; // Adjust the rotation speed as needed
-        var modelRotationY = mouse.x * 0.01; // Adjust the rotation speed as needed
+        var modelRotationX = -mouse.y * 0.4; // Adjust the rotation speed as needed
+        var modelRotationY = mouse.x * 0.4; // Adjust the rotation speed as needed
         model.rotation.x = modelRotationX;
         model.rotation.y = modelRotationY;
 
