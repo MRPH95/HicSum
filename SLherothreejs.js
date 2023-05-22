@@ -121,22 +121,22 @@ function init() {
 
       scene.add(particles);
 
-      // Create a composer for post-processing
-      var composer = new THREE.EffectComposer(renderer);
-        composer.setSize(window.innerWidth, window.innerHeight);
+// Create a composer for post-processing
+var composer = new THREE.EffectComposer(renderer);
+composer.setSize(window.innerWidth, window.innerHeight);
 
-      // Create a render pass
-      var renderPass = new THREE.RenderPass(scene, camera);
-        composer.addPass(renderPass);
+// Create a render pass
+var renderPass = new THREE.RenderPass(scene, camera);
+composer.addPass(renderPass);
 
-      // Create a bokeh pass
-      var bokehPass = new THREE.BokehPass(scene, camera, {
-        focus: 1.0,
-        aperture: 0.025,
-        maxblur: 0.01,
-     });
-     bokehPass.renderToScreen = true;
-      composer.addPass(bokehPass);
+// Create a bokeh pass
+var bokehPass = new THREE.BokehPass(scene, camera, {
+  focus: 1.0,
+  aperture: 0.025,
+  maxblur: 0.01,
+});
+bokehPass.renderToScreen = true;
+composer.addPass(bokehPass);
 
 // Animate the model and particles
 function animate() {
