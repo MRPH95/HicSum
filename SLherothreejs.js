@@ -5,12 +5,12 @@ function init() {
 
   // Create a camera
   var camera = new THREE.PerspectiveCamera(
-    2,
+    24,
     window.innerWidth / window.innerHeight,
     0.1,
     1000
   );
-  camera.position.set(0, 0, 10); // Adjust the camera position as needed
+  camera.position.set(0, 0, 1); // Adjust the camera position as needed
 
   // Create a WebGL renderer
   var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
