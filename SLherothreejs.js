@@ -155,12 +155,10 @@ function init() {
 // Constants
 var MOUSE_SENSITIVITY = 0.01; // Adjust the mouse sensitivity as needed
 var SCROLL_SENSITIVITY = 0.01; // Adjust the scroll sensitivity as needed
-var CAMERA_CEILING = 5; // Height of the camera ceiling/starting point
 
 // Variables
 var targetRotationY = 0;
-var targetCameraY = CAMERA_CEILING; // Initialize camera position at the ceiling
-
+      
 // Event listeners
 document.addEventListener('mousemove', onDocumentMouseMove, false);
 document.addEventListener('wheel', onDocumentMouseWheel, false);
