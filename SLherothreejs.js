@@ -34,7 +34,7 @@ function init() {
   scene.add(light2);
 
   var light3 = new THREE.DirectionalLight(0xffffff, 1);
-  light3.position.set(0.3, 0.5, 1); // Adjust the position as needed
+  light3.position.set(0, -.1, 1); // Adjust the position as needed
   scene.add(light3);
 
   var light4 = new THREE.DirectionalLight(0xffffff, 1);
