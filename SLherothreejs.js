@@ -149,45 +149,51 @@ function init() {
         mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
       });
 
-      // Animation loop
-      function animate() {
-        requestAnimationFrame(animate);
+// Animation loop
+function animate() {
+  requestAnimationFrame(animate);
 
-        // Rotate the model towards the mouse position
-        var modelRotationX = -mouse.y * 0.4; // Adjust the rotation speed as needed
-        var modelRotationY = mouse.x * 0.4; // Adjust the rotation speed as needed
-        model.rotation.x = modelRotationX;
-        model.rotation.y = modelRotationY;
+  // Orbit the camera around the model based on the mouse position
+  var modelRotationX = -mouse.y * 0.4; // Adjust the rotation speed as needed
+  var modelRotationY = mouse.x * 0.4; // Adjust the rotation speed as needed
 
-        // Update particle positions
-        particles.children.forEach(function (particle) {
-          particle.position.add(particle.userData.velocity);
+  var cameraDistance = 2; // Adjust the distance from the model as needed
+  var cameraX = Math.sin(modelRotationY) * cameraDistance;
+  var cameraY = Math.sin(modelRotationX) * cameraDistance;
+  var cameraZ = Math.cos(modelRotationY) * cameraDistance;
 
-          // Reset particle position if it goes out of bounds
-          if (
-            particle.position.x < -1 ||
-            particle.position.x > 1 ||
-            particle.position.y < -1 ||
-            particle.position.y > 1 ||
-            particle.position.z < -1 ||
-            particle.position.z > 1
-          ) {
-            particle.position.set(
-              Math.random() * 2 - 1,
-              Math.random() * 2 - 1,
-              Math.random() * 2 - 1
-            );
-            particle.userData.velocity = new THREE.Vector3(
-              (Math.random() - 0.5) * 0.005,
-              (Math.random() - 0.5) * 0.005,
-              (Math.random() - 0.5) * 0.005
-            );
-          }
-        });
+  camera.position.set(cameraX, cameraY, cameraZ);
+  camera.lookAt(model.position);
 
-        // Render the scene
-        composer.render();
-      }
+  // Update particle positions
+  particles.children.forEach(function (particle) {
+    particle.position.add(particle.userData.velocity);
+
+    if (
+      particle.position.x < -1 ||
+      particle.position.x > 1 ||
+      particle.position.y < -1 ||
+      particle.position.y > 1 ||
+      particle.position.z < -1 ||
+      particle.position.z > 1
+    ) {
+      particle.position.set(
+        Math.random() * 2 - 1,
+        Math.random() * 2 - 1,
+        Math.random() * 2 - 1
+      );
+      particle.userData.velocity = new THREE.Vector3(
+        (Math.random() - 0.5) * 0.005,
+        (Math.random() - 0.5) * 0.005,
+        (Math.random() - 0.5) * 0.005
+      );
+    }
+  });
+
+  // Render the scene
+  composer.render();
+}
+
 
       // Start the animation loop
       animate();
