@@ -62,10 +62,10 @@ function init() {
           );
           child.material.map = baseColorTexture;
           // Tint the base color of the model
-          var baseColor = new THREE.Color("#201c1e");
+          var baseColor = new THREE.Color("#9c5f69");
           child.material.color = baseColor;
           // Set the emissive color of the model
-          var emissiveColor = new THREE.Color("#D6D4D3");
+          var emissiveColor = new THREE.Color("#9c5f69");
           child.material.emissive = emissiveColor;
           child.material.emissiveIntensity = 0.01; // Adjust the intensity as needed
 
@@ -153,10 +153,10 @@ function init() {
       });
       
 // Constants
-var MOUSE_SENSITIVITY = 0.01; // Adjust the mouse sensitivity as needed
+var MOUSE_SENSITIVITY = 0.005; // Adjust the mouse sensitivity as needed
 var TARGET_OFFSET_Y = 0.1; // Offset in the y-axis
 var MAX_ROTATION_X = Math.PI / 4; // Maximum rotation in radians
-var SPIN_SENSITIVITY = 0.01; // Adjust the spin sensitivity as needed
+var SPIN_SENSITIVITY = 0.005; // Adjust the spin sensitivity as needed
 
 // Variables
 var targetRotationY = 0;
