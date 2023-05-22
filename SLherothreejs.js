@@ -21,7 +21,7 @@ function init() {
   var container = document.getElementById("canvas-wrapper");
   container.appendChild(renderer.domElement);
 
-  var light = new THREE.AmbientLight(0xffffff); // soft white light
+  var light = new THREE.AmbientLight(0xffffff, 3); // soft white light
   scene.add(light);
 
   // Create directional lights
