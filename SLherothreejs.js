@@ -187,7 +187,7 @@ function animate() {
   model.rotation.y += (targetRotationY - model.rotation.y) * 0.05;
 
   // Update camera position based on scroll
-  var cameraY = -targetCameraY;
+  var cameraY = targetCameraY;
   camera.position.setY(cameraY);
   camera.lookAt(model.position);
 
