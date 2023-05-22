@@ -155,8 +155,8 @@ renderer.setSize(window.innerWidth, window.innerHeight);
   model.rotation.y += 0.01; // Adjust the rotation speed as needed
 
         // Orbit the camera around the model based on the mouse position
-        var modelRotationX = -mouse.y * 0.4; // Adjust the rotation speed as needed
-        var modelRotationY = mouse.x * 0.4; // Adjust the rotation speed as needed
+        var modelRotationX = mouse.y * 0.4; // Adjust the rotation speed as needed
+        var modelRotationY = -mouse.x * 0.4; // Adjust the rotation speed as needed
 
         var cameraDistance = 1.5; // Adjust the distance from the model as needed
         var cameraX = Math.sin(modelRotationY) * cameraDistance;
