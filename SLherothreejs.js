@@ -34,7 +34,7 @@ function init() {
   scene.add(light2);
 
   var light3 = new THREE.DirectionalLight(0xffffff, 1);
-  light3.position.set(0, -0.1, 1); // Adjust the position as needed
+  light3.position.set(0, -.1, 1); // Adjust the position as needed
   scene.add(light3);
 
   var light4 = new THREE.DirectionalLight(0xffffff, 1);
@@ -61,8 +61,8 @@ function init() {
       var model = gltf.scene;
 
       // Set the initial position, scale, and rotation of the model as desired
-      model.position.set(0, -0.1, 0);
-      model.scale.set(0.5, 0.5, 0.5);
+      model.position.set(0, -.1, 0);
+      model.scale.set(.5, .5, .5);
       model.rotation.set(0, 0, 0);
 
       // Traverse the model and apply the textures
@@ -79,7 +79,7 @@ function init() {
           // Set the emissive color of the model
           var emissiveColor = new THREE.Color("#D6D4D3");
           child.material.emissive = emissiveColor;
-          child.material.emissiveIntensity = 0.01; // Adjust the intensity as needed
+          child.material.emissiveIntensity = .01; // Adjust the intensity as needed
 
           // Apply the bump map
           var bumpMap = new THREE.TextureLoader().load(
@@ -142,76 +142,51 @@ function init() {
         // Rotate the model counterclockwise on the vertical axis
         model.rotation.y += 0.01; // Adjust the rotation speed as needed
 
-        // Update the position of the particle light
-        particleLight.position.copy(particle.position);
-
         // Render the scene with the camera
         composer.render();
-        
-        // Call animate recursively
-        requestAnimationFrame(animate);
-      }
 
-      // Animate the particles
-      function animateParticles() {
+        // Update the particle positions and illuminate them
         particles.children.forEach(function (particle) {
           particle.position.add(particle.userData.velocity);
 
-          // Reset particle position and velocity when it goes beyond a certain distance
-          if (particle.position.distanceTo(camera.position) > 2) {
+          if (
+            particle.position.x < -1 ||
+            particle.position.x > 1 ||
+            particle.position.y < -1 ||
+            particle.position.y > 1 ||
+            particle.position.z < -1 ||
+            particle.position.z > 1
+          ) {
             particle.position.set(
               Math.random() * 2 - 1,
               Math.random() * 2 - 1,
               Math.random() * 2 - 1
             );
-            particle.userData.velocity.set(
-              (Math.random() - 0.5) * 0.002,
-              (Math.random() - 0.5) * 0.002,
-              (Math.random() - 0.5) * 0.002
-            );
           }
-
-          // Calculate blur factor based on the depth from the camera
-          var depth = particle.position.distanceTo(camera.position);
-          var blurFactor = Math.max(0, 1 - depth * 0.5); // Adjust the blur intensity as needed
-
-          // Update particle material properties
-          particle.material.opacity = blurFactor;
-          particle.material.transparent = blurFactor < 1;
         });
 
-        // Render the scene with the camera
-        composer.render();
+        // Update the particle light position
+        particleLight.position.copy(camera.position);
 
-        // Call animateParticles recursively
-        requestAnimationFrame(animateParticles);
+        // Request the next frame
+        requestAnimationFrame(animate);
       }
 
-      // Start the animation loop
+      // Start the animation
       animate();
-
-      // Start the particle animation loop
-      animateParticles();
-    },
-    undefined,
-    function (error) {
-      console.error("Error loading GLTF model:", error);
     }
   );
 
-  // Function to handle window resize events
-  function handleResize() {
+  // Handle window resizing
+  function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
     composer.setSize(window.innerWidth, window.innerHeight);
   }
 
-  // Listen for window resize events
-  window.addEventListener("resize", handleResize);
+  window.addEventListener("resize", onWindowResize, false);
 }
 
-// Initialize the scene after the Three.js library and GLTFLoader have been loaded
-window.addEventListener("DOMContentLoaded", function () {
-  init();
-});
+// Call the init function to start the application
+init();
