@@ -154,7 +154,7 @@ function init() {
       
 // Constants
 var MOUSE_SENSITIVITY = 0.001; // Adjust the mouse sensitivity as needed
-var TARGET_OFFSET_Y = 1; // Offset in the y-axis
+var TARGET_OFFSET_Y = .2; // Offset in the y-axis
 var MAX_ROTATION_X = Math.PI / 4; // Maximum rotation in radians
 
 // Variables
