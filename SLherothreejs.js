@@ -5,7 +5,7 @@ function init() {
 
   // Create a camera
   var camera = new THREE.PerspectiveCamera(
-    72,
+    120,
     window.innerWidth / window.innerHeight,
     0.1,
     1000
