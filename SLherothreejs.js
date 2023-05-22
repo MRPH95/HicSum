@@ -34,7 +34,7 @@ function init() {
   scene.add(light2);
 
   var light3 = new THREE.DirectionalLight(0xffffff, 1);
-  light3.position.set(0, -0.1, 1); // Adjust the position as needed
+  light3.position.set(0, -.1, 1); // Adjust the position as needed
   scene.add(light3);
 
   var light4 = new THREE.DirectionalLight(0xffffff, 1);
@@ -121,21 +121,79 @@ function init() {
 
       scene.add(particles);
 
-        // Request the next frame
+      // Animate the model and particles
+      function animate() {
+        // Rotate the model counterclockwise on the vertical axis
+        model.rotation.y += 0.01; // Adjust the rotation speed as needed
+
+        // Render the scene with the camera
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.render(scene, camera);
+
+        // Call animate recursively
         requestAnimationFrame(animate);
       }
 
-      // Start the animation
+      // Animate the particles
+      function animateParticles() {
+        particles.children.forEach(function (particle) {
+          particle.position.add(particle.userData.velocity);
+
+          // Reset particle position and velocity when it goes beyond a certain distance
+          if (particle.position.distanceTo(camera.position) > 2) {
+            particle.position.set(
+              Math.random() * 2 - 1,
+              Math.random() * 2 - 1,
+              Math.random() * 2 - 1
+            );
+            particle.userData.velocity.set(
+              (Math.random() - 0.5) * 0.002,
+              (Math.random() - 0.5) * 0.002,
+              (Math.random() - 0.5) * 0.002
+            );
+          }
+
+          // Calculate blur factor based on the depth from the camera
+          var depth = particle.position.distanceTo(camera.position);
+          var blurFactor = Math.max(0, 1 - depth * 0.5); // Adjust the blur intensity as needed
+
+          // Update particle material properties
+          particle.material.opacity = blurFactor;
+          particle.material.transparent = blurFactor < 1;
+        });
+
+        // Render the scene with the camera
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.render(scene, camera);
+
+        // Call animateParticles recursively
+        requestAnimationFrame(animateParticles);
+      }
+
+      // Start the animation loop
       animate();
+
+      // Start the particle animation loop
+      animateParticles();
+    },
+    undefined,
+    function (error) {
+      console.error("Error loading GLTF model:", error);
     }
   );
 
-  // Handle window resizing
-  function onWindowResize() {
+  // Function to handle window resize events
+  function handleResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
   }
 
-  window.addEventListener("resize", onWindowResize, false);
+  // Listen for window resize events
+  window.addEventListener("resize", handleResize);
 }
+
+// Initialize the scene after the Three.js library and GLTFLoader have been loaded
+window.addEventListener("DOMContentLoaded", function () {
+  init();
+});
