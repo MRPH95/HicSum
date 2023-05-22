@@ -34,7 +34,7 @@ function init() {
   scene.add(light2);
 
   var light3 = new THREE.DirectionalLight(0xffffff, 5);
-  light3.position.set(0, -0.1, 1); // Adjust the position as needed
+  light3.position.set(-1, -0.1, 1); // Adjust the position as needed
   scene.add(light3);
 
   var light4 = new THREE.DirectionalLight(0xffffff, 3);
@@ -106,7 +106,7 @@ function init() {
       scene.add(model);
 
       // Create particles
-      var particleCount = 250;
+      var particleCount = 50;
       var particles = new THREE.Group();
       var particleGeometry = new THREE.SphereBufferGeometry(0.001, 6, 6);
       var particleMaterial = new THREE.MeshBasicMaterial({ color: 0xd8bfc3 });
