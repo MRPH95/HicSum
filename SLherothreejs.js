@@ -12,10 +12,10 @@ function init() {
   );
   camera.position.set(0, 0, 1); // Adjust the camera position as needed
 
-// Create a WebGL renderer
-var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-renderer.setClearColor(0xeeeeee); // Set the clear color to white and alpha to 0 (transparent)
-renderer.setSize(window.innerWidth, window.innerHeight);
+  // Create a WebGL renderer
+  var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setClearColor(0xeeeeee); // Set the clear color to white and alpha to 0 (transparent)
+  renderer.setSize(window.innerWidth, window.innerHeight);
 
   // Append the renderer to the container element
   var container = document.getElementById("canvas-wrapper");
@@ -137,26 +137,23 @@ renderer.setSize(window.innerWidth, window.innerHeight);
       });
       composer.addPass(bokehPass);
 
-      // Track mouse position
-      var mouse = new THREE.Vector2();
+      // Track scroll position
+      var scrollY = 0;
 
-      // Update mouse position on mouse move event
-      window.addEventListener("mousemove", function (event) {
-        // Convert mouse position to normalized device coordinates (NDC)
-        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+      // Update scroll position on scroll event
+      window.addEventListener("scroll", function () {
+        scrollY = window.scrollY;
       });
 
       // Animation loop
       function animate() {
         requestAnimationFrame(animate);
-        
-         // Rotate the model on the y-axis
-  model.rotation.y += 0.01; // Adjust the rotation speed as needed
 
-        // Orbit the camera around the model based on the mouse position
-        var modelRotationX = mouse.y * 0.2; // Adjust the rotation speed as needed
-        var modelRotationY = -mouse.x * 0.2; // Adjust the rotation speed as needed
+        // Rotate the model on the y-axis
+        model.rotation.y += 0.01; // Adjust the rotation speed as needed
+
+        // Orbit the camera vertically based on the scroll position
+        var modelRotationX = -scrollY * 0.01; // Adjust the rotation speed as needed
 
         var cameraDistance = 1.5; // Adjust the distance from the model as needed
         var cameraX = Math.sin(modelRotationY) * cameraDistance;
