@@ -12,9 +12,10 @@ function init() {
   );
   camera.position.set(0, .5, 1); // Adjust the camera position as needed
 
-  // Create a WebGL renderer
+// Create a WebGL renderer
 var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setClearColor(0xffffff, 0); // Set the clear color to white and alpha to 0 (transparent)
+renderer.setClearAlpha(0); // Set the clear alpha value to 0
 renderer.setSize(window.innerWidth, window.innerHeight);
 
   // Append the renderer to the container element
