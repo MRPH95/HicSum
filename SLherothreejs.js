@@ -49,8 +49,8 @@ function init() {
       var model = gltf.scene;
 
       // Set the initial position, scale, and rotation of the model as desired
-      model.position.set(0, 0, 1);
-      model.scale.set(1, 1, 1);
+      model.position.set(0, 0, 0);
+      model.scale.set(.5, .5, .5);
       model.rotation.set(0, 0, 0);
 
       // Traverse the model and apply the textures
