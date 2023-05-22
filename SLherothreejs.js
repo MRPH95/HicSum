@@ -154,6 +154,7 @@ function init() {
       
 // Constants
 var MOUSE_SENSITIVITY = 0.01; // Adjust the mouse sensitivity as needed
+var TARGET_OFFSET_Y = 1; // Offset in the y-axis
 
 // Variables
 var targetRotationY = 0;
@@ -178,8 +179,10 @@ function animate() {
   model.rotation.y += (targetRotationY - model.rotation.y) * 0.05;
   model.rotation.x += (targetRotationX - model.rotation.x) * 0.05;
 
-  // Update camera's lookAt
-  camera.lookAt(model.position);
+  // Update camera's lookAt with offset
+  var targetPosition = model.position.clone();
+  targetPosition.y += TARGET_OFFSET_Y;
+  camera.lookAt(targetPosition);
 
   // Update particle positions
   particles.children.forEach(function (particle) {
