@@ -121,95 +121,82 @@ function init() {
 
       scene.add(particles);
 
-// Create a composer for post-processing
-var composer = new THREE.EffectComposer(renderer);
-composer.setSize(window.innerWidth, window.innerHeight);
+      // Create a composer for post-processing
+      var composer = new THREE.EffectComposer(renderer);
+      composer.setSize(window.innerWidth, window.innerHeight);
 
-// Create a render pass
-var renderPass = new THREE.RenderPass(scene, camera);
-composer.addPass(renderPass);
+      // Create a render pass
+      var renderPass = new THREE.RenderPass(scene, camera);
+      composer.addPass(renderPass);
 
-// Create a bokeh pass
-var bokehPass = new THREE.BokehPass(scene, camera, {
-  focus: 20,
-  aperture: 0.000001,
-  maxblur: 5,
-});
-bokehPass.renderToScreen = true;
-composer.addPass(bokehPass);
+      // Create a bokeh pass
+      var bokehPass = new THREE.BokehPass(scene, camera, {
+        focus: 20,
+        aperture: 0.000001,
+        maxblur: 5,
+      });
+      bokehPass.renderToScreen = true;
+      composer.addPass(bokehPass);
 
-// Animate the model and particles
-function animate() {
-  // Rotate the model counterclockwise on the vertical axis
-  model.rotation.y += 0.01; // Adjust the rotation speed as needed
+      // Track mouse position
+      var mouse = new THREE.Vector2();
 
-  // Render the scene with the composer
-  composer.render();
+      // Update mouse position on mouse move event
+      window.addEventListener("mousemove", function (event) {
+        // Convert mouse position to normalized device coordinates (NDC)
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+      });
 
-  // Call animate recursively
-  requestAnimationFrame(animate);
-}
+      // Animation loop
+      function animate() {
+        requestAnimationFrame(animate);
 
-      // Animate the particles
-      function animateParticles() {
+        // Rotate the model towards the mouse position
+        var modelRotationX = -mouse.y * 0.2; // Adjust the rotation speed as needed
+        var modelRotationY = mouse.x * 0.2; // Adjust the rotation speed as needed
+        model.rotation.x = modelRotationX;
+        model.rotation.y = modelRotationY;
+
+        // Update particle positions
         particles.children.forEach(function (particle) {
           particle.position.add(particle.userData.velocity);
 
-          // Reset particle position and velocity when it goes beyond a certain distance
-          if (particle.position.distanceTo(camera.position) > 2) {
+          // Reset particle position if it goes out of bounds
+          if (
+            particle.position.x < -1 ||
+            particle.position.x > 1 ||
+            particle.position.y < -1 ||
+            particle.position.y > 1 ||
+            particle.position.z < -1 ||
+            particle.position.z > 1
+          ) {
             particle.position.set(
               Math.random() * 2 - 1,
               Math.random() * 2 - 1,
               Math.random() * 2 - 1
             );
-            particle.userData.velocity.set(
-              (Math.random() - 0.5) * 0.002,
-              (Math.random() - 0.5) * 0.002,
-              (Math.random() - 0.5) * 0.002
+            particle.userData.velocity = new THREE.Vector3(
+              (Math.random() - 0.5) * 0.005,
+              (Math.random() - 0.5) * 0.005,
+              (Math.random() - 0.5) * 0.005
             );
           }
-
-          // Calculate blur factor based on the depth from the camera
-          var depth = particle.position.distanceTo(camera.position);
-          var blurFactor = Math.max(0, 1 - depth * 0.5); // Adjust the blur intensity as needed
-
-          // Update particle material properties
-          particle.material.opacity = blurFactor;
-          particle.material.transparent = blurFactor < 1;
         });
 
-        // Render the scene with the camera
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.render(scene, camera);
-
-        // Call animateParticles recursively
-        requestAnimationFrame(animateParticles);
+        // Render the scene
+        composer.render();
       }
 
       // Start the animation loop
       animate();
-
-      // Start the particle animation loop
-      animateParticles();
     },
     undefined,
     function (error) {
-      console.error("Error loading GLTF model:", error);
+      console.error(error);
     }
   );
-
-  // Function to handle window resize events
-  function handleResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  }
-
-  // Listen for window resize events
-  window.addEventListener("resize", handleResize);
 }
 
-// Initialize the scene after the Three.js library and GLTFLoader have been loaded
-window.addEventListener("DOMContentLoaded", function () {
-  init();
-});
+// Call the init function to start the application
+init();
