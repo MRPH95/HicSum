@@ -145,55 +145,57 @@ function init() {
         scrollY = window.scrollY;
       });
 
-      // Animation loop
-      function animate() {
-        requestAnimationFrame(animate);
+// Animation loop
+function animate() {
+  requestAnimationFrame(animate);
 
-        // Rotate the model on the y-axis
-        model.rotation.y += 0.01; // Adjust the rotation speed as needed
+  // Rotate the model on the y-axis
+  model.rotation.y += 0.01; // Adjust the rotation speed as needed
 
-        // Orbit the camera vertically based on the scroll position
-        var modelRotationX = -scrollY * 0.01; // Adjust the rotation speed as needed
+  // Orbit the camera vertically based on the scroll position
+  var modelRotationX = -scrollY * 0.01; // Adjust the rotation speed as needed
+  var modelRotationY = 0.01; // Initial value for model rotation
 
-        var cameraDistance = 1.5; // Adjust the distance from the model as needed
-        var cameraX = Math.sin(modelRotationY) * cameraDistance;
-        var cameraY = Math.sin(modelRotationX) * cameraDistance;
-        var cameraZ = Math.cos(modelRotationY) * cameraDistance;
+  var cameraDistance = 1.5; // Adjust the distance from the model as needed
+  var cameraX = Math.sin(modelRotationY) * cameraDistance;
+  var cameraY = Math.sin(modelRotationX) * cameraDistance;
+  var cameraZ = Math.cos(modelRotationY) * cameraDistance;
 
-        camera.position.set(cameraX, cameraY, cameraZ);
-        camera.lookAt(model.position);
+  camera.position.set(cameraX, cameraY, cameraZ);
+  camera.lookAt(model.position);
 
-        // Update particle positions
-        particles.children.forEach(function (particle) {
-          particle.position.add(particle.userData.velocity);
+  // Update particle positions
+  particles.children.forEach(function (particle) {
+    particle.position.add(particle.userData.velocity);
 
-          if (
-            particle.position.x < -1 ||
-            particle.position.x > 1 ||
-            particle.position.y < -1 ||
-            particle.position.y > 1 ||
-            particle.position.z < -1 ||
-            particle.position.z > 1
-          ) {
-            particle.position.set(
-              Math.random() * 2 - 1,
-              Math.random() * 2 - 1,
-              Math.random() * 2 - 1
-            );
-            particle.userData.velocity = new THREE.Vector3(
-              (Math.random() - 0.5) * 0.005,
-              (Math.random() - 0.5) * 0.005,
-              (Math.random() - 0.5) * 0.005
-            );
-          }
-        });
+    if (
+      particle.position.x < -1 ||
+      particle.position.x > 1 ||
+      particle.position.y < -1 ||
+      particle.position.y > 1 ||
+      particle.position.z < -1 ||
+      particle.position.z > 1
+    ) {
+      particle.position.set(
+        Math.random() * 2 - 1,
+        Math.random() * 2 - 1,
+        Math.random() * 2 - 1
+      );
+      particle.userData.velocity = new THREE.Vector3(
+        (Math.random() - 0.5) * 0.005,
+        (Math.random() - 0.5) * 0.005,
+        (Math.random() - 0.5) * 0.005
+      );
+    }
+  });
 
-        // Render the scene
-        composer.render();
-      }
+  // Render the scene
+  composer.render();
+}
 
-      // Start the animation loop
-      animate();
+// Start the animation loop
+animate();
+
     },
     undefined,
     function (error) {
