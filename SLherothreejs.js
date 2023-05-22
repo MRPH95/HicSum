@@ -34,14 +34,13 @@ function init() {
   scene.add(light2);
 
   var light3 = new THREE.DirectionalLight(0xffffff, 1);
-  light3.position.set(0, -.1, 1); // Adjust the position as needed
+  light3.position.set(0, -0.1, 1); // Adjust the position as needed
   scene.add(light3);
 
   var light4 = new THREE.DirectionalLight(0xffffff, 1);
   light4.position.set(0, 0, -3); // Adjust the position as needed
   scene.add(light4);
-  
-  
+
   // Load the post-processing library
   var composer = new POSTPROCESSING.EffectComposer(renderer);
   composer.addPass(new POSTPROCESSING.RenderPass(scene, camera));
@@ -62,8 +61,8 @@ function init() {
       var model = gltf.scene;
 
       // Set the initial position, scale, and rotation of the model as desired
-      model.position.set(0, -.1, 0);
-      model.scale.set(.5, .5, .5);
+      model.position.set(0, -0.1, 0);
+      model.scale.set(0.5, 0.5, 0.5);
       model.rotation.set(0, 0, 0);
 
       // Traverse the model and apply the textures
@@ -80,7 +79,7 @@ function init() {
           // Set the emissive color of the model
           var emissiveColor = new THREE.Color("#D6D4D3");
           child.material.emissive = emissiveColor;
-          child.material.emissiveIntensity = .01; // Adjust the intensity as needed
+          child.material.emissiveIntensity = 0.01; // Adjust the intensity as needed
 
           // Apply the bump map
           var bumpMap = new THREE.TextureLoader().load(
@@ -134,25 +133,24 @@ function init() {
 
       scene.add(particles);
 
+      // Create a point light for particle illumination
+      var particleLight = new THREE.PointLight(0xffffff, 1, 2); // Adjust the color and intensity as needed
+      scene.add(particleLight);
+
       // Animate the model and particles
       function animate() {
         // Rotate the model counterclockwise on the vertical axis
         model.rotation.y += 0.01; // Adjust the rotation speed as needed
 
-        // Render the scene with the camera
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.render(scene, camera);
+        // Update the position of the particle light
+        particleLight.position.copy(particle.position);
 
+        // Render the scene with the camera
+        composer.render();
+        
         // Call animate recursively
         requestAnimationFrame(animate);
       }
-      
-        // Create a point light for particle illumination
-  var particleLight = new THREE.PointLight(0xffffff, 1, 2); // Adjust the color and intensity as needed
-  scene.add(particleLight);
-      
-            // Update the position of the particle light
-      particleLight.position.copy(particle.position);
 
       // Animate the particles
       function animateParticles() {
@@ -183,8 +181,7 @@ function init() {
         });
 
         // Render the scene with the camera
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.render(scene, camera);
+        composer.render();
 
         // Call animateParticles recursively
         requestAnimationFrame(animateParticles);
@@ -207,6 +204,7 @@ function init() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
+    composer.setSize(window.innerWidth, window.innerHeight);
   }
 
   // Listen for window resize events
