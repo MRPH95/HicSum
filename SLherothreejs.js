@@ -15,6 +15,7 @@ function init() {
   // Create a WebGL renderer
   var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setClearColor(0x000000, 0); // Set the clear color to black and alpha to 0 (transparent)
+  renderer.setClearAlpha(0); // Set the clear alpha value to 0
   renderer.setSize(window.innerWidth, window.innerHeight);
 
   // Append the renderer to the container element
@@ -153,8 +154,8 @@ function init() {
         requestAnimationFrame(animate);
 
         // Rotate the model towards the mouse position
-        var modelRotationX = -mouse.y * 0.2; // Adjust the rotation speed as needed
-        var modelRotationY = mouse.x * 0.2; // Adjust the rotation speed as needed
+        var modelRotationX = -mouse.y * 0.01; // Adjust the rotation speed as needed
+        var modelRotationY = mouse.x * 0.01; // Adjust the rotation speed as needed
         model.rotation.x = modelRotationX;
         model.rotation.y = modelRotationY;
 
