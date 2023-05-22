@@ -130,14 +130,17 @@ function init() {
       var renderPass = new THREE.RenderPass(scene, camera);
       composer.addPass(renderPass);
 
-      // Create a bokeh pass
-      var bokehPass = new THREE.BokehPass(scene, camera, {
-        focus: 20,
-        aperture: 0.000001,
-        maxblur: 5,
-      });
-      bokehPass.renderToScreen = true;
-      composer.addPass(bokehPass);
+// Create a bokeh pass
+var bokehPass = new THREE.BokehPass(scene, camera, {
+  focus: 20,
+  aperture: 0.000001,
+  maxblur: 5,
+  width: window.innerWidth,
+  height: window.innerHeight,
+});
+bokehPass.renderToScreen = true;
+composer.addPass(bokehPass);
+
 
       // Track mouse position
       var mouse = new THREE.Vector2();
