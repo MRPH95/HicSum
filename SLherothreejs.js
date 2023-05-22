@@ -62,10 +62,10 @@ function init() {
           );
           child.material.map = baseColorTexture;
           // Tint the base color of the model
-          var baseColor = new THREE.Color("#9c5f69");
+          var baseColor = new THREE.Color("#201c1e");
           child.material.color = baseColor;
           // Set the emissive color of the model
-          var emissiveColor = new THREE.Color("#9c5f69");
+          var emissiveColor = new THREE.Color("#d6d4d3");
           child.material.emissive = emissiveColor;
           child.material.emissiveIntensity = 0.01; // Adjust the intensity as needed
 
