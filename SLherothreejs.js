@@ -41,18 +41,6 @@ function init() {
   light4.position.set(0, 0, -3); // Adjust the position as needed
   scene.add(light4);
 
-  // Load the post-processing library
-  var composer = new POSTPROCESSING.EffectComposer(renderer);
-  composer.addPass(new POSTPROCESSING.RenderPass(scene, camera));
-
-  // Create a depth of field effect
-  var bokehPass = new POSTPROCESSING.BokehPass(scene, camera, {
-    focus: 1, // Adjust the focus distance
-    aperture: 0.025, // Adjust the aperture size
-    maxblur: 0.01, // Adjust the maximum blur strength
-  });
-  composer.addPass(bokehPass);
-
   // Load the GLTF model
   var loader = new THREE.GLTFLoader();
   loader.load(
@@ -143,7 +131,7 @@ function init() {
         model.rotation.y += 0.01; // Adjust the rotation speed as needed
 
         // Render the scene with the camera
-        composer.render();
+        renderer.render(scene, camera);
 
         // Update the particle positions and illuminate them
         particles.children.forEach(function (particle) {
@@ -182,11 +170,7 @@ function init() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
-    composer.setSize(window.innerWidth, window.innerHeight);
   }
 
   window.addEventListener("resize", onWindowResize, false);
 }
-
-// Call the init function to start the application
-init();
