@@ -133,7 +133,7 @@ composer.addPass(renderPass);
 var bokehPass = new THREE.BokehPass(scene, camera, {
   focus: 1.0,
   aperture: 0.0001,
-  maxblur: 0.8,
+  maxblur: 5,
 });
 bokehPass.renderToScreen = true;
 composer.addPass(bokehPass);
