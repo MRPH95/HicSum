@@ -21,6 +21,7 @@ function init() {
   var container = document.getElementById("canvas-wrapper");
   container.appendChild(renderer.domElement);
 
+
   var light = new THREE.AmbientLight(0xffffff, 4); // soft white light
   scene.add(light);
 
@@ -231,16 +232,17 @@ function animate() {
     }
   });
 
-      // Function to handle window resize events
-      function onWindowResize() {
-        // Update camera aspect ratio
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
+    // Update renderer size on window resize
+  function onWindowResize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  }
 
-        // Update renderer size
-        renderer.setSize(window.innerWidth, window.innerHeight);
+  // Event listener for window resize
+  window.addEventListener("resize", onWindowResize, false);
 
-   
+  
   // Render the scene
   renderer.render(scene, camera);
 }
@@ -251,7 +253,7 @@ animate();
 
 
 
-    }
+    },
     undefined,
     function (error) {
       console.error(error);
