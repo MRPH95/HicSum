@@ -144,10 +144,11 @@ function init() {
       window.addEventListener("scroll", function () {
         scrollY = window.scrollY;
       });
-
+      
 // Constants
 var MOUSE_SENSITIVITY = 0.01; // Adjust the mouse sensitivity as needed
 var SCROLL_SENSITIVITY = 0.01; // Adjust the scroll sensitivity as needed
+var CAMERA_CEILING = 5; // Height of the camera ceiling/starting point
 
 // Variables
 var targetRotationY = 0;
@@ -166,6 +167,9 @@ function onDocumentMouseMove(event) {
 // Mouse wheel event handler
 function onDocumentMouseWheel(event) {
   targetCameraY += event.deltaY * SCROLL_SENSITIVITY;
+
+  // Limit camera position to the ceiling/starting point
+  targetCameraY = Math.max(targetCameraY, CAMERA_CEILING);
 }
 
 // Animation loop
@@ -177,6 +181,7 @@ function animate() {
 
   // Update camera position based on scroll
   var cameraY = -targetCameraY;
+  cameraY = Math.max(cameraY, CAMERA_CEILING);
   camera.position.setY(cameraY);
   camera.lookAt(model.position);
 
