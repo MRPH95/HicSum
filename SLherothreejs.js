@@ -10,7 +10,7 @@ function init() {
     0.1,
     1000
   );
-  camera.position.set(0, .5, 1); // Adjust the camera position as needed
+  camera.position.set(0, .1, 1); // Adjust the camera position as needed
 
   // Create a WebGL renderer
   var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -165,7 +165,7 @@ function init() {
 // Constants
 var MOUSE_SENSITIVITY = 0.003; // Adjust the mouse sensitivity as needed
 var TARGET_OFFSET_Y = -0.1; // Offset in the y-axis
-var TARGET_OFFSET_X = 2; // Offset in the x-axis
+var TARGET_OFFSET_X = -.5; // Offset in the x-axis
 var MAX_ROTATION_X = Math.PI / 12; // Maximum rotation in radians
 var SPIN_SENSITIVITY = 0.005; // Adjust the spin sensitivity as needed
 
@@ -214,6 +214,7 @@ function animate() {
   // Update camera's lookAt with offset
   var targetPosition = model.position.clone();
   targetPosition.y += TARGET_OFFSET_Y;
+  targetPosition.x +=  TARGET_OFFSET_X;
   camera.lookAt(targetPosition);
 
   // Update particle positions
