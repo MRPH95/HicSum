@@ -60,7 +60,7 @@ function init() {
 
       // Set the initial position, scale, and rotation of the model as desired
       model.position.set(0, 0, 0);
-      model.scale.set(0.45, 0.45, 0.45);
+      model.scale.set(0.5, 0.5, 0.5);
       model.rotation.set(0, 0, 0);
 
       // Traverse the model and apply the textures
@@ -165,7 +165,7 @@ function init() {
 // Constants
 var MOUSE_SENSITIVITY = 0.003; // Adjust the mouse sensitivity as needed
 var TARGET_OFFSET_Y = 0.05; // Offset in the y-axis
-var TARGET_OFFSET_X = -.15; // Offset in the x-axis
+var TARGET_OFFSET_X = -.1; // Offset in the x-axis
 var MAX_ROTATION_X = Math.PI / 12; // Maximum rotation in radians
 var SPIN_SENSITIVITY = 0.005; // Adjust the spin sensitivity as needed
 
@@ -252,10 +252,10 @@ function onWindowResize() {
   renderer.setSize(window.innerWidth, window.innerHeight);
 
   // Adjust model scale based on window width
-  var modelScale = 0.45; // Initial model scale
+  var modelScale = 0.5; // Initial model scale
   if (window.innerWidth < 840) {
     var scaleFactor = window.innerWidth / 840; // Calculate scale factor
-    modelScale = 0.45 * scaleFactor; // Apply scale factor to initial scale
+    modelScale = 0.5 * scaleFactor; // Apply scale factor to initial scale
 
     // Smooth transition for camera offset in the X direction
     var targetOffsetX = 0; // Target offset in the X direction
