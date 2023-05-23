@@ -75,9 +75,9 @@ function init() {
           var baseColor = new THREE.Color("#201c1e");
           child.material.color = baseColor;
           // Set the emissive color of the model
-          var emissiveColor = new THREE.Color("#d6d4d3");
+          var emissiveColor = new THREE.Color("#201c1e");
           child.material.emissive = emissiveColor;
-          child.material.emissiveIntensity = 0.02; // Adjust the intensity as needed
+          child.material.emissiveIntensity = 0.05; // Adjust the intensity as needed
 
           // Apply the bump map
           var bumpMap = new THREE.TextureLoader().load(
