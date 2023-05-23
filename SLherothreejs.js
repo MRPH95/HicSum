@@ -256,6 +256,22 @@ function onWindowResize() {
   if (window.innerWidth < 840) {
     var scaleFactor = window.innerWidth / 840; // Calculate scale factor
     modelScale = 0.45 * scaleFactor; // Apply scale factor to initial scale
+
+    // Smooth transition for camera offset in the X direction
+    var targetOffsetX = 0; // Target offset in the X direction
+    var currentOffsetX = camera.position.x; // Current offset in the X direction
+    var offsetTransitionSpeed = 0.02; // Transition speed for the offset
+
+    function animateOffset() {
+      var dx = targetOffsetX - currentOffsetX; // Calculate the difference
+      currentOffsetX += dx * offsetTransitionSpeed; // Update the current offset
+      camera.position.x = currentOffsetX; // Set the camera offset
+      if (Math.abs(dx) > 0.001) {
+        requestAnimationFrame(animateOffset);
+      }
+    }
+
+    animateOffset();
   }
 
   // Set the model scale
