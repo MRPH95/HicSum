@@ -198,12 +198,12 @@ function onDocumentMouseUp(event) {
   spinEnabled = false;
 }
 
-// Animation loop
-function animate() {
-  requestAnimationFrame(animate);
-  
-  // Rotate the model
-  model.rotation.y += 0.001; // Adjust the rotation speed as needed
+     // Animation loop
+      function animate() {
+        requestAnimationFrame(animate);
+
+        // Rotate the model
+        model.rotation.y += 0.01; // Adjust the rotation speed as desired
   
   // Update model rotation based on mouse movement
   model.rotation.y += (targetRotationY - model.rotation.y) * 0.05;
