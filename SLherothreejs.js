@@ -42,6 +42,10 @@ function init() {
   light4.position.set(0, 0, -2); // Adjust the position as needed
   scene.add(light4);
 
+  var light5 = new THREE.DirectionalLight(0xffffff, 3);
+  light5.position.set(0, 0, 2); // Adjust the position as needed
+  scene.add(light5);  
+  
   // Load the GLTF model
   var loader = new THREE.GLTFLoader();
   loader.load(
