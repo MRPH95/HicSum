@@ -25,6 +25,11 @@ function init() {
   var light = new THREE.AmbientLight(0xffffff, 4); // soft white light
   scene.add(light);
 
+  // Create a hemisphere light
+  var hemisphereLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 2);
+  hemisphereLight.position.set(0, 0, 1); // Adjust the position as needed
+  scene.add(hemisphereLight);
+  
   // Create directional lights
   var light1 = new THREE.DirectionalLight(0xffffff, 7);
   light1.position.set(-2, 1, 2); // Adjust the position as needed
