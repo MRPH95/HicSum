@@ -245,7 +245,6 @@ function onDocumentMouseUp(event) {
     }
   });
 
-// Update renderer size on window resize
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
@@ -266,7 +265,23 @@ function onWindowResize() {
       var dx = targetOffsetX - currentOffsetX; // Calculate the difference
       currentOffsetX += dx * offsetTransitionSpeed; // Update the current offset
       camera.position.x = currentOffsetX; // Set the camera offset
-      if (Math.abs(dx) > 0.001) {
+
+      // Smooth transition for camera target to (0, 0, 0)
+      var targetPosition = new THREE.Vector3(0, 0, 0); // Target position for camera lookAt
+      var currentPosition = new THREE.Vector3(
+        model.position.x,
+        model.position.y + TARGET_OFFSET_Y,
+        model.position.z + TARGET_OFFSET_X
+      ); // Current position for camera lookAt
+      var positionTransitionSpeed = 0.02; // Transition speed for the position
+
+      var dp = targetPosition.clone().sub(currentPosition); // Calculate the position difference
+      currentPosition.add(dp.multiplyScalar(positionTransitionSpeed)); // Update the current position
+
+      model.position.y = currentPosition.y - TARGET_OFFSET_Y; // Adjust model position in the Y direction
+      model.position.x = currentPosition.z - TARGET_OFFSET_X; // Adjust model position in the X direction
+
+      if (Math.abs(dx) > 0.001 || dp.length() > 0.001) {
         requestAnimationFrame(animateOffset);
       }
     }
@@ -277,6 +292,7 @@ function onWindowResize() {
   // Set the model scale
   model.scale.set(modelScale, modelScale, modelScale);
 }
+
 
   // Event listener for window resize
   window.addEventListener("resize", onWindowResize, false);
