@@ -252,12 +252,14 @@ function onWindowResize() {
 
   // Adjust model scale based on window width
   var modelScale = 0.55; // Initial model scale
+  var targetOffsetX = 0; // Target offset in the X direction
+  var targetPosition = new THREE.Vector3(0, 0, 0); // Target position for camera lookAt
+
   if (window.innerWidth < 840) {
     var scaleFactor = window.innerWidth / 840; // Calculate scale factor
     modelScale = 0.55 * scaleFactor; // Apply scale factor to initial scale
 
     // Smooth transition for camera offset in the X direction
-    var targetOffsetX = 0; // Target offset in the X direction
     var currentOffsetX = camera.position.x; // Current offset in the X direction
     var offsetTransitionSpeed = 0.02; // Transition speed for the offset
 
@@ -267,7 +269,6 @@ function onWindowResize() {
       camera.position.x = currentOffsetX; // Set the camera offset
 
       // Smooth transition for camera target to (0, 0, 0)
-      var targetPosition = new THREE.Vector3(0, 0, 0); // Target position for camera lookAt
       var currentPosition = new THREE.Vector3(
         model.position.x,
         model.position.y + TARGET_OFFSET_Y,
@@ -287,15 +288,25 @@ function onWindowResize() {
     }
 
     animateOffset();
+  } else {
+    // Set camera offset and model position directly if width is not less than 840
+    camera.position.x = targetOffsetX;
+    model.position.y = -TARGET_OFFSET_Y;
+    model.position.x = -TARGET_OFFSET_X;
   }
 
   // Set the model scale
   model.scale.set(modelScale, modelScale, modelScale);
 }
 
+// Check the window width on page load
+if (window.innerWidth < 840) {
+  onWindowResize();
+}
 
-  // Event listener for window resize
-  window.addEventListener("resize", onWindowResize, false);
+// Call onWindowResize when the window is resized
+window.addEventListener("resize", onWindowResize);
+
 
   
   // Render the scene
