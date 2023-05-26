@@ -26,7 +26,7 @@ function init() {
   scene.add(light);
 
   // Create a hemisphere light
-  var hemisphereLight = new THREE.HemisphereLight(0xffffff, 0xd8bfc3, 5);
+  var hemisphereLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 3);
   hemisphereLight.position.set(0, 0, 1); // Adjust the position as needed
   scene.add(hemisphereLight);
   
@@ -50,6 +50,10 @@ function init() {
   var light5 = new THREE.DirectionalLight(0xffffff, 3);
   light5.position.set(0, 0, 2); // Adjust the position as needed
   scene.add(light5);  
+  
+    var light6 = new THREE.DirectionalLight(0xffffff, 7);
+  light5.position.set(-.3, -1, 1; // Adjust the position as needed
+  scene.add(light6);  
   
   // Load the GLTF model
   var loader = new THREE.GLTFLoader();
