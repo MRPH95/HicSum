@@ -26,7 +26,7 @@ function init() {
   scene.add(light);
 
   // Create a hemisphere light
-  var hemisphereLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 2);
+  var hemisphereLight = new THREE.HemisphereLight(0xffffff, 0xd8bfc3, 5);
   hemisphereLight.position.set(0, 0, 1); // Adjust the position as needed
   scene.add(hemisphereLight);
   
