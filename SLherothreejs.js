@@ -52,7 +52,7 @@ function init() {
   scene.add(light5);  
   
     var light6 = new THREE.DirectionalLight(0xffffff, 7);
-  light5.position.set(-.3, -1, 1; // Adjust the position as needed
+  light6.position.set(-.3, -1, 1; // Adjust the position as needed
   scene.add(light6);  
   
   // Load the GLTF model
